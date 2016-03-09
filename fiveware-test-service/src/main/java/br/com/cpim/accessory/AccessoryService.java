@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 
 import br.com.cpim.model.Accessory;
 
+/**
+ * Interface para Accessory Service
+ * 
+ * @author Roger
+ *
+ */
 @Service
 public interface AccessoryService {
 
