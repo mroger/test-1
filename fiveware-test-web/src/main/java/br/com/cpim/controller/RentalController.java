@@ -3,6 +3,7 @@ package br.com.cpim.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class RentalController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<RentalFormInput> saveRental(@RequestBody final RentalFormInput formInput) {
+	public ResponseEntity<RentalFormInput> saveRental(@RequestBody @Valid final RentalFormInput formInput) {
 		try {
 			final Rental rental = rentalAssembler.toModel(formInput);
 			Rental storedRental = rentalService.save(rental);

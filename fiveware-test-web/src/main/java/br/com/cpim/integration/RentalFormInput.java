@@ -2,6 +2,9 @@ package br.com.cpim.integration;
 
 import java.util.Arrays;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * Classe DTO entre o front-end e o controller web. 
  * 
@@ -11,10 +14,20 @@ import java.util.Arrays;
 public class RentalFormInput {
 
 	private Long idRental;
+	
+	@NotBlank(message="A marca deve ser informada")
 	private String brand;
+	
+	@NotBlank(message="O modelo deve ser informado")
 	private String model;
+	
+	@NotBlank(message="O ano deve ser informado")
 	private String year;
+	
+	@NotEmpty(message="Pelo menos um acessório deve ser informado")
 	private Integer[] accessories;
+	
+	@NotBlank(message="A cor deve ser informada")
 	private String color;
 	
 	/**
