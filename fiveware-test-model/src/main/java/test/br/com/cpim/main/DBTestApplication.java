@@ -18,6 +18,12 @@ import br.com.cpim.model.Rental;
 import br.com.cpim.repository.AccessoryRepository;
 import br.com.cpim.repository.RentalRepository;
 
+/**
+ * Classe criada para exercitar o banco de dados e os mapeamentos JPA isoladamente da aplicacao.
+ * 
+ * @author Roger
+ *
+ */
 @Import(DbConfig.class)
 @SpringBootApplication
 public class DBTestApplication implements CommandLineRunner {
