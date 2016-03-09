@@ -1,8 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>fiveware-test-model</artifactId>
-	<name>Test Model</name>
+	<artifactId>fiveware-test-web</artifactId>
+	<packaging>war</packaging>
+	<name>Test Web</name>
 	<parent>
 		<groupId>org.fiveware</groupId>
 		<artifactId>fiveware-test</artifactId>
@@ -12,17 +13,17 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector-version}</version>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-dbcp2</artifactId>
-			<version>${commons-dbcp2-version}</version>
+			<groupId>org.fiveware</groupId>
+			<artifactId>fiveware-test-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

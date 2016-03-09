@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Rental</title>
+		
+		<script src="../scripts/jquery/jquery.min.js"></script>
+		<script type = "text/javascript" language = "javascript">
+			$(document).ready(function() {
+				var saveRentalURI = 'http://localhost:8080/rental';
+				
+				$("#salvar").click(function(event) {
+					var data = toJSON();
+					
+					$.ajax({
+						headers: { 
+					        'Accept': 'application/json',
+					        'Content-Type': 'application/json' 
+					    },
+						type: 'POST',
+						url: saveRentalURI,
+						data: JSON.stringify(data),
+						success: null,
+						dataType: "json"
+					})
+					.done(function(data) {
+						alert('Dados salvos com sucesso!');
+					})
+					.fail(function(data) {
+						alert('Erro ao salvar os dados!');
+					});
+				});
+				
+				var toJSON = function() {
+					var data = {};
+					data.brand = $('#brand').val();
+					data.model = $('#model').val();
+					data.year = $('#year').val();
+					var accessories = [];
+					$.each($("input[name='accessories']:checked"), function(){            
+						accessories.push(Number($(this).val()));
+		            });
+					data.accessories = accessories;
+					data.color = $("input[name='color']:checked").val();
+		            
+		            return data;
+				}
+			});
+		</script>
+		
+	</head>
+	<body>
+		
+		<h1>Locação de automóveis</h1>
+		
+		<form id="rental" name="rental">
+			<table>
+				<tr>
+					<td>Marca:</td>
+					<td>
+						<select id="brand" name="brand">
+							<option value=""></option>
+							<option value="Ford">Ford</option>
+							<option value="Chevrolet">Chevrolet</option>
+							<option value="Volkswagen">Volkswagen</option>
+							<option value="Chrysler">Chrysler	</option>
+						</select>
+					</td>
+				<tr>
+					<td>Modelo:</td>
+					<td>
+						<select id="model" name="model">
+							<option value=""></option>
+							<option value="Ka">Ka</option>
+							<option value="Fusion">Fusion</option>
+							<option value="Omega">Omega</option>
+							<option value="Onix">Onix</option>
+							<option value="Fusca">Fusca</option>
+							<option value="New Beetle">New Beetle</option>
+							<option value="Dodge Ram">Dodge Ram</option>
+							<option value="Stratus">Stratus</option>
+						</select>
+					</td>
+				</tr>
+					<tr>
+					<td>Ano:</td>
+					<td><input type="text" id="year" name="year" /> </td>
+				<tr>
+					<td>Acessórios:</td>
+					<td>
+						<table>
+							<tr>
+								<td><input id="accessories" name="accessories" type="checkbox" value="1"/> Vidros Elétricos</td>
+								<td><input id="accessories" name="accessories" type="checkbox" value="2"/> Travas Elétricas</td>
+							</tr>
+							<tr>
+								<td><input id="accessories" name="accessories" type="checkbox" value="3"/> Air Bag</td>
+								<td><input id="accessories" name="accessories" type="checkbox" value="4"/> Ar Condicionado</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Cor:</td>
+					<td>
+						<table>
+							<tr>
+								<td><input id="color" name="color" type="radio" value="Preto" /> Preto</td>
+								<td><input id="color" name="color" type="radio" value="Branco"/> Branco</td>
+								<td><input id="color" name="color" type="radio" value="Chumbo"/> Chumbo</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input id="salvar" type="button" value="Salvar" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+	</body>
+</html>
