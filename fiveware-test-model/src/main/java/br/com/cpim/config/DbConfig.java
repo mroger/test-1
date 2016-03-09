@@ -19,7 +19,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * O objectivo dessa classe é fornecer os beans para conexao e gerenciamento de transacoes
+ * O objetivo dessa classe é fornecer os beans para conexao e gerenciamento de transacoes
  * pelo Spring.
  * 
  * @author Roger
