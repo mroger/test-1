@@ -34,7 +34,6 @@ public class DbConfig {
 		basicDataSource.setUrl(env.getProperty("jdbc.url"));
 		basicDataSource.setUsername(env.getProperty("jdbc.username"));
 		basicDataSource.setPassword(env.getProperty("jdbc.password"));
-		//TODO Completar as propriedades
 		
 		return basicDataSource;
 	}
@@ -57,14 +56,6 @@ public class DbConfig {
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPackagesToScan("br.com.cpim.model");
         factory.setDataSource(dataSource);
- 
-        //Properties properties = new Properties();
-        //properties.setProperty("hibernate.cache.use_second_level_cache", "true");
-        //properties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
-        //properties.setProperty("hibernate.cache.use_query_cache", "true");
-        //properties.setProperty("hibernate.generate_statistics", "false");
- 
-        //factory.setJpaProperties(properties);
  
         factory.afterPropertiesSet();
  
