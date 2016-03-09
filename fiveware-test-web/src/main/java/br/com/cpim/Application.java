@@ -6,6 +6,12 @@ import org.springframework.context.annotation.Import;
 
 import br.com.cpim.config.DbConfig;
 
+/**
+ * Classe responsavel por iniciar a aplicação Web
+ * 
+ * @author Roger
+ *
+ */
 @Import(DbConfig.class)
 @SpringBootApplication
 public class Application {

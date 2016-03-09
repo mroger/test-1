@@ -18,6 +18,12 @@ import br.com.cpim.model.Accessory;
 import br.com.cpim.model.Rental;
 import br.com.cpim.rental.RentalService;
 
+/**
+ * Classe responsável por atender às requisicoes Web via REST.
+ * 
+ * @author Roger
+ *
+ */
 @RestController
 @RequestMapping("/rental")
 public class RentalController {

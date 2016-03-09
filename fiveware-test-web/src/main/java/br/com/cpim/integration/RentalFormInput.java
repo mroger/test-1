@@ -2,6 +2,12 @@ package br.com.cpim.integration;
 
 import java.util.Arrays;
 
+/**
+ * Classe DTO entre o front-end e o controller web. 
+ * 
+ * @author Roger
+ *
+ */
 public class RentalFormInput {
 
 	private Long idRental;

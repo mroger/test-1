@@ -14,12 +14,25 @@ import br.com.cpim.accessory.AccessoryService;
 import br.com.cpim.model.Accessory;
 import br.com.cpim.model.Rental;
 
+/**
+ * Classe responsavel por converter os dados vindos do fomulário para uma entidade da aplicacao
+ * e vice-versa.
+ * 
+ * @author Roger
+ *
+ */
 @Component
 public class RentalAssembler {
 	
 	@Inject
 	private AccessoryService accessoryService;
 
+	/**
+	 * Converte um objeto entidade para um objeto de fomulário.
+	 * 
+	 * @param rental
+	 * @return RentalFormInput
+	 */
 	public RentalFormInput fromModel(Rental rental) {
 		RentalFormInput formInput = new RentalFormInput();
 		formInput.setIdRental(rental.getIdRental());
@@ -40,6 +53,12 @@ public class RentalAssembler {
 		return formInput;
 	}
 	
+	/**
+	 * Converte um objeto que representa o formulário de aluguel para entidade.
+	 * 
+	 * @param formInput
+	 * @return Rental
+	 */
 	public Rental toModel(RentalFormInput formInput) {
 		Rental rental = new Rental();
 		rental.setBrand(formInput.getBrand());
