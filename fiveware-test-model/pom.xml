@@ -17,12 +17,12 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector-version}</version>
+			<version>${mysql-connector-version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
-			<version>${commons-dbcp2-version}</version>
+			<version>${commons-dbcp2-version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 	</dependencies>
 </project>

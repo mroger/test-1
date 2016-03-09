@@ -1,4 +1,4 @@
-package br.com.cpim.main;
+package test.br.com.cpim.main;
 
 import java.util.ArrayList;
 import java.util.List;
