@@ -10,25 +10,29 @@
 				var saveRentalURI = 'http://localhost:8080/rental';
 				
 				$("#salvar").click(function(event) {
-					var data = toJSON();
-					
-					$.ajax({
-						headers: { 
-					        'Accept': 'application/json',
-					        'Content-Type': 'application/json' 
-					    },
-						type: 'POST',
-						url: saveRentalURI,
-						data: JSON.stringify(data),
-						success: null,
-						dataType: "json"
-					})
-					.done(function(data) {
-						alert('Dados salvos com sucesso!');
-					})
-					.fail(function(data) {
-						alert('Erro ao salvar os dados!');
-					});
+					if (isFormDataValid()) {
+						var data = toJSON();
+						
+						$.ajax({
+							headers: { 
+						        'Accept': 'application/json',
+						        'Content-Type': 'application/json' 
+						    },
+							type: 'POST',
+							url: saveRentalURI,
+							data: JSON.stringify(data),
+							success: null,
+							dataType: "json"
+						})
+						.done(function(data) {
+							alert('Dados salvos com sucesso!');
+						})
+						.fail(function(data) {
+							alert('Erro ao salvar os dados!');
+						});
+					} else {
+						alert('O formulário possui campos obrigatórios não preenchidos. Verifique e envie novamente, por favor.');
+					}
 				});
 				
 				var toJSON = function() {
@@ -44,6 +48,26 @@
 					data.color = $("input[name='color']:checked").val();
 		            
 		            return data;
+				}
+				
+				var isFormDataValid = function() {
+					var valid = true;
+					if ($('#brand').val() === '') {
+						valid = false;
+					}
+					if ($('#model').val() === '') {
+						valid = false;
+					}
+					if ($('#year').val() === '') {
+						valid = false;
+					}
+					if ($("input[name='accessories']:checked").length == 0) {
+						valid = false;
+					}
+					if ($("input[name='color']:checked").val() === undefined) {
+						valid = false;
+					}
+					return valid;
 				}
 			});
 		</script>
