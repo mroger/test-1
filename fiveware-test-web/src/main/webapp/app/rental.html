@@ -37,14 +37,6 @@
 					}
 				});
 				
-				var getFormAccessories = function () {
-					var accessories = [];
-					$.each($("input[name='accessories']:checked"), function(){            
-						accessories.push(Number($(this).val()));
-		            });
-					return accessories;
-				}
-				
 				var isFormDataValid = function() {
 					var valid = true;
 					if ($('#brand').val() === '') {
