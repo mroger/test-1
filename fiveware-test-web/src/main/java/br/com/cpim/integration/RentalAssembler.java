@@ -41,16 +41,21 @@ public class RentalAssembler {
 		formInput.setYear(rental.getYear());
 		formInput.setColor(rental.getColor());
 		
+		List<Integer> accessoriesArray = toAccessoriesIdList(rental.getAccessories());
+		formInput.setAccessories(accessoriesArray.toArray(new Integer[0]));
+		
+		return formInput;
+	}
+
+	public List<Integer> toAccessoriesIdList(List<Accessory> accessories) {
 		Function<Accessory, Integer> function = new Function<Accessory, Integer>() {
 	        @Override
 	        public Integer apply(Accessory accessory) {
 	        	return accessory.getIdAccessory();
 	        }
 	    };
-		List<Integer> accessoriesArray = Lists.transform(rental.getAccessories(), function);
-		formInput.setAccessories(accessoriesArray.toArray(new Integer[0]));
-		
-		return formInput;
+		List<Integer> accessoriesArray = Lists.transform(accessories, function);
+		return accessoriesArray;
 	}
 	
 	/**
