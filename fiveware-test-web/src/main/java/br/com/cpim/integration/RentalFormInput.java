@@ -30,6 +30,20 @@ public class RentalFormInput {
 	@NotBlank(message="A cor deve ser informada")
 	private String color;
 	
+	public RentalFormInput() {
+		super();
+	}
+	
+	public RentalFormInput(String brand, String model, String year, Integer[] accessories,
+			String color) {
+		super();
+		this.brand = brand;
+		this.model = model;
+		this.year = year;
+		this.accessories = accessories;
+		this.color = color;
+	}
+
 	/**
 	 * @return the idRental
 	 */
