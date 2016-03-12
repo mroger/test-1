@@ -2,6 +2,7 @@ package br.com.cpim.integration;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import br.com.cpim.accessory.AccessoryService;
@@ -28,10 +28,10 @@ public class RentalAssemblerTest {
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		Mockito.when(accessoryService.find(1)).thenReturn(new Accessory(1));
-		Mockito.when(accessoryService.find(2)).thenReturn(new Accessory(2));
-		Mockito.when(accessoryService.find(3)).thenReturn(new Accessory(3));
-		Mockito.when(accessoryService.find(4)).thenReturn(new Accessory(4));
+		when(accessoryService.find(1)).thenReturn(new Accessory(1));
+		when(accessoryService.find(2)).thenReturn(new Accessory(2));
+		when(accessoryService.find(3)).thenReturn(new Accessory(3));
+		when(accessoryService.find(4)).thenReturn(new Accessory(4));
 	}
 	
 
