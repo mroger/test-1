@@ -6,15 +6,17 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Test Parent</name>
-	
+
 	<parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.3.3.RELEASE</version>
-    </parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.3.3.RELEASE</version>
+	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<skipITs>true</skipITs>
+
 		<java.version>1.8</java.version>
 		<javax.inject.version>1</javax.inject.version>
 		<spring.boot.version>1.3.3.RELEASE</spring.boot.version>
@@ -22,6 +24,10 @@
 		<mysql-connector-version>5.1.38</mysql-connector-version>
 		<commons-dbcp2-version>2.1.1</commons-dbcp2-version>
 		<junit-version>4.12</junit-version>
+		<httpclient-version>4.5.2</httpclient-version>
+		<junitparams-version>1.0.4</junitparams-version>
+		<surefire-plugin-version>2.19.1</surefire-plugin-version>
+		<failsafe-plugin-version>2.19.1</failsafe-plugin-version>
 	</properties>
 
 	<dependencies>
@@ -32,14 +38,14 @@
 			<artifactId>javax.inject</artifactId>
 			<version>${javax.inject.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<version>${spring.boot.version}</version><!--$NO-MVN-MAN-VER$-->
+			<version>${spring.boot.version}</version><!--$NO-MVN-MAN-VER$ -->
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -69,6 +75,30 @@
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire-plugin-version}</version><!--$NO-MVN-MAN-VER$ -->
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${failsafe-plugin-version}</version><!--$NO-MVN-MAN-VER$ -->
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<skipITs>${skipITs}</skipITs>
 				</configuration>
 			</plugin>
 
