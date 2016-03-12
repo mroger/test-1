@@ -5,13 +5,15 @@
 		<title>Rental</title>
 		
 		<script src="../scripts/jquery/jquery.min.js"></script>
+		<script src="../scripts/form2js.js"></script>
 		<script type = "text/javascript">
 			$(document).ready(function() {
 				var saveRentalURI = 'http://localhost:8080/rental';
 				
 				$("#salvar").click(function(event) {
 					if (isFormDataValid()) {
-						var data = toJSON();
+						
+						var data = form2js('rental', '.', true);
 						
 						$.ajax({
 							headers: { 
@@ -43,18 +45,6 @@
 					return accessories;
 				}
 				
-				var toJSON = function() {
-					var data = {
-						brand: $('#brand').val(),
-						model: $('#model').val(),
-						year: $('#year').val(),
-						accessories: getFormAccessories(),
-						color: $("input[name='color']:checked").val()
-					};
-		            
-		            return data;
-				}
-				
 				var isFormDataValid = function() {
 					var valid = true;
 					if ($('#brand').val() === '') {
@@ -66,7 +56,7 @@
 					if ($('#year').val() === '') {
 						valid = false;
 					}
-					if ($("input[name='accessories']:checked").length == 0) {
+					if ($("input[name='accessories[]']:checked").length == 0) {
 						valid = false;
 					}
 					if ($("input[name='color']:checked").val() === undefined) {
@@ -119,12 +109,12 @@
 					<td>
 						<table>
 							<tr>
-								<td><input id="accessories" name="accessories" type="checkbox" value="1"/> Vidros Elétricos</td>
-								<td><input id="accessories" name="accessories" type="checkbox" value="2"/> Travas Elétricas</td>
+								<td><input id="accessories" name="accessories[]" type="checkbox" value="1"/> Vidros Elétricos</td>
+								<td><input id="accessories" name="accessories[]" type="checkbox" value="2"/> Travas Elétricas</td>
 							</tr>
 							<tr>
-								<td><input id="accessories" name="accessories" type="checkbox" value="3"/> Air Bag</td>
-								<td><input id="accessories" name="accessories" type="checkbox" value="4"/> Ar Condicionado</td>
+								<td><input id="accessories" name="accessories[]" type="checkbox" value="3"/> Air Bag</td>
+								<td><input id="accessories" name="accessories[]" type="checkbox" value="4"/> Ar Condicionado</td>
 							</tr>
 						</table>
 					</td>
