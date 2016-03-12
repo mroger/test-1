@@ -21,6 +21,17 @@
 			<version>${guava-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient-version}</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+		<dependency>
+			<groupId>pl.pragmatists</groupId>
+			<artifactId>JUnitParams</artifactId>
+			<version>${junitparams-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.fiveware</groupId>
 			<artifactId>fiveware-test-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
