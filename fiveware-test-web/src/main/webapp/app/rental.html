@@ -35,17 +35,22 @@
 					}
 				});
 				
-				var toJSON = function() {
-					var data = {};
-					data.brand = $('#brand').val();
-					data.model = $('#model').val();
-					data.year = $('#year').val();
+				var getFormAccessories = function () {
 					var accessories = [];
 					$.each($("input[name='accessories']:checked"), function(){            
 						accessories.push(Number($(this).val()));
 		            });
-					data.accessories = accessories;
-					data.color = $("input[name='color']:checked").val();
+					return accessories;
+				}
+				
+				var toJSON = function() {
+					var data = {
+						brand: $('#brand').val(),
+						model: $('#model').val(),
+						year: $('#year').val(),
+						accessories: getFormAccessories(),
+						color: $("input[name='color']:checked").val()
+					};
 		            
 		            return data;
 				}
