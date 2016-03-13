@@ -106,4 +106,9 @@
 
 	</build>
 
+	<modules>
+		<module>fiveware-test-model</module>
+		<module>fiveware-test-service</module>
+		<module>fiveware-test-web</module>
+	</modules>
 </project>
