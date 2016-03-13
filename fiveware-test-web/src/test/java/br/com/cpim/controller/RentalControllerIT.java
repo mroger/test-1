@@ -56,8 +56,15 @@ public class RentalControllerIT {
 	private RestTemplate restTemplate = new TestRestTemplate();
 	
 	@Test
-	public void shouldReturnBadRequestStatusCodeWhenPayloadIsEmpty() {
+	public void shouldReturnBadRequestStatusCodeWhenPayloadIsNull() {
 		RentalFormInput nullFormInput = null;
+		
+		checkResponseForBadRequest(nullFormInput);
+	}
+	
+	@Test
+	public void shouldReturnBadRequestStatusCodeWhenPayloadIsEmpty() {
+		RentalFormInput nullFormInput = new RentalFormInput();
 		
 		checkResponseForBadRequest(nullFormInput);
 	}
