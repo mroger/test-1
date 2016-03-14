@@ -28,7 +28,18 @@
 		<junitparams-version>1.0.4</junitparams-version>
 		<surefire-plugin-version>2.19.1</surefire-plugin-version>
 		<failsafe-plugin-version>2.19.1</failsafe-plugin-version>
+		<hsqldb.version>2.3.3</hsqldb.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.hsqldb</groupId>
+				<artifactId>hsqldb</artifactId>
+				<version>${hsqldb.version}</version><!--$NO-MVN-MAN-VER$ -->
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 
