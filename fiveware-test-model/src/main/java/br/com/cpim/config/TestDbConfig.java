@@ -1,15 +1,17 @@
 package br.com.cpim.config;
 
 import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.hibernate4.HibernateExceptionTranslator;
 import org.springframework.orm.jpa.JpaDialect;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -21,30 +23,31 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * O objetivo dessa classe é fornecer os beans para conexao e gerenciamento de transacoes
- * pelo Spring.
+ * pelo Spring com banco de dados em memoria para os testes.
  * 
  * @author Roger
  *
  */
 @Configuration
-@PropertySource(value = "classpath:config/db.properties")
 @EnableTransactionManagement
 @EnableJpaRepositories("br.com.cpim.repository")
-@Profile("dev")
-public class DevDbConfig {
+@Profile("test")
+public class TestDbConfig {
 	
 	@Autowired
 	Environment env;
 	
 	@Bean
-	public BasicDataSource basicDataSource() {
-		BasicDataSource basicDataSource = new BasicDataSource();
-		basicDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		basicDataSource.setUrl(env.getProperty("jdbc.url"));
-		basicDataSource.setUsername(env.getProperty("jdbc.username"));
-		basicDataSource.setPassword(env.getProperty("jdbc.password"));
+	public DataSource dataSource() {
 		
-		return basicDataSource;
+		// no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
+		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+		EmbeddedDatabase db = builder
+			.setType(EmbeddedDatabaseType.HSQL) //.H2 or .DERBY
+			.addScript("db/sql/create-db.sql")
+			.addScript("db/sql/insert-data.sql")
+			.build();
+		return db;
 	}
 	
 	@Bean
@@ -54,12 +57,12 @@ public class DevDbConfig {
  
     @Bean
     @Autowired
-    public EntityManagerFactory entityManagerFactory(BasicDataSource dataSource) {
+    public EntityManagerFactory entityManagerFactory(DataSource dataSource) {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(false);
         vendorAdapter.setShowSql(true);
-        vendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL5InnoDBDialect");
-        vendorAdapter.setDatabase(Database.MYSQL);
+        vendorAdapter.setDatabasePlatform("org.hibernate.dialect.HSQLDialect");
+        vendorAdapter.setDatabase(Database.HSQL);
  
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
