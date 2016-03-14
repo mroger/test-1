@@ -18,6 +18,7 @@ import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.rules.SpringClassRule;
 import org.springframework.test.context.junit4.rules.SpringMethodRule;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +38,7 @@ import junitparams.naming.TestCaseName;
 @SpringApplicationConfiguration(Application.class)
 @WebIntegrationTest
 @Transactional
+@ActiveProfiles("test")
 public class RentalControllerIT {
 	
 	private static final String URL_SERVICE = "http://localhost:8080/rental/";
@@ -64,9 +66,9 @@ public class RentalControllerIT {
 	
 	@Test
 	public void shouldReturnBadRequestStatusCodeWhenPayloadIsEmpty() {
-		RentalFormInput nullFormInput = new RentalFormInput();
+		RentalFormInput emptyFormInput = new RentalFormInput();
 		
-		checkResponseForBadRequest(nullFormInput);
+		checkResponseForBadRequest(emptyFormInput);
 	}
 	
 	@Test
@@ -79,6 +81,21 @@ public class RentalControllerIT {
 		
 		checkResponseForBadRequest(formInput);
 	}
+
+	public Object parametersForBadRequest() {
+        return new Object[] {
+        	new RentalFormTemplate().withoutBrand().toObjectArray(),
+        	new RentalFormTemplate().withoutModel().toObjectArray(),
+        	new RentalFormTemplate().withoutYear().toObjectArray(),
+        	new RentalFormTemplate().withoutAccessories().toObjectArray(),
+        	new RentalFormTemplate().withoutColor().toObjectArray(),
+        	new RentalFormTemplate().withBrand("").toObjectArray(),
+        	new RentalFormTemplate().withModel("").toObjectArray(),
+        	new RentalFormTemplate().withYear("").toObjectArray(),
+        	new RentalFormTemplate().withColor("").toObjectArray(),
+        	new RentalFormTemplate().withEmptyAccessories().toObjectArray()
+        };
+    }
 	
 	@Test
 	@Parameters(method="parametersForOkResponseStatus")
@@ -109,25 +126,6 @@ public class RentalControllerIT {
 		assertThat("Should have correctly persisted", persistedRental.getColor(), equalTo(formInput.getColor()));
 	}
 
-    private List<Integer> getAccessoryIdList(List<Accessory> accessories) {
-    	return rentalAssembler.toAccessoriesIdList(accessories);
-	}
-
-	public Object parametersForBadRequest() {
-        return new Object[] {
-        	new RentalFormTemplate().withoutBrand().toObjectArray(),
-        	new RentalFormTemplate().withoutModel().toObjectArray(),
-        	new RentalFormTemplate().withoutYear().toObjectArray(),
-        	new RentalFormTemplate().withoutAccessories().toObjectArray(),
-        	new RentalFormTemplate().withoutColor().toObjectArray(),
-        	new RentalFormTemplate().withBrand("").toObjectArray(),
-        	new RentalFormTemplate().withModel("").toObjectArray(),
-        	new RentalFormTemplate().withYear("").toObjectArray(),
-        	new RentalFormTemplate().withColor("").toObjectArray(),
-        	new RentalFormTemplate().withEmptyAccessories().toObjectArray()
-        };
-    }
-
     public Object parametersForOkResponseStatus() {
         return new Object[] {
         	new RentalFormTemplate().withAccessories(1).toObjectArray(),
@@ -136,6 +134,10 @@ public class RentalControllerIT {
         	new RentalFormTemplate().withAccessories(1, 2, 3, 4).toObjectArray()
         };
     }
+
+    private List<Integer> getAccessoryIdList(List<Accessory> accessories) {
+    	return rentalAssembler.toAccessoriesIdList(accessories);
+	}
 
 	private void checkResponseForBadRequest(RentalFormInput formInput) {
 		ResponseEntity<RentalFormInput> response = 
