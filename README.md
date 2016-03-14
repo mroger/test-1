@@ -42,7 +42,7 @@ Quando a aplicação tiver sido iniciada, ela pode ser acessada no endereço:
 
 Os testes de integração do projeto usam banco em memória, portanto dispensam a existência de um banco MySQL presente e configurado.
 
-Para executar todos os testes do projeto, execute o seguinte comando a partir da pasta raiz do projeto:
+Para executar todos os testes do projeto, execute o seguinte comando a partir da pasta **raiz do projeto** :
 
 	mvn clean -DskipITs=false -DfailIfNoTests=false  verify
 	
