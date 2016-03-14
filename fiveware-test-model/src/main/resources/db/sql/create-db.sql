@@ -1,0 +1,20 @@
+CREATE MEMORY TABLE RENTAL (
+  idRental BIGINT IDENTITY PRIMARY KEY,
+  brand VARCHAR(64) NOT NULL,
+  model VARCHAR(64) NOT NULL,
+  year VARCHAR(4) NOT NULL,
+  color VARCHAR(64) NOT NULL
+);
+
+CREATE TABLE ACCESSORY (
+  idAccessory BIGINT IDENTITY PRIMARY KEY,
+  description VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE RENTAL_ACCESSORY (
+  idAccessory BIGINT,
+  idRental BIGINT,
+  CONSTRAINT uc_rental_accessory UNIQUE (idAccessory, idRental),
+  CONSTRAINT fk_rental FOREIGN KEY (idRental) REFERENCES RENTAL(idRental),
+  CONSTRAINT fk_accessory FOREIGN KEY (idAccessory) REFERENCES ACCESSORY(idAccessory)
+);
